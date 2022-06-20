@@ -1,0 +1,26 @@
+// Colors
+@import "../scss/colors.scss";
+// Layouts
+@import "../Layout/BasicLayout/BasicLayout.scss";
+// Pages
+@import "../pages/account.scss";
+@import "../pages/index.scss";
+@import "../pages/games/platform.scss";
+// Components
+@import "../components/Header/Header.scss";
+@import "../components/Header/TopBar/TopBar.scss";
+@import "../components/Header/Menu/Menu.scss";
+@import "../components/Modal/BasicModal/BasicModal.scss";
+@import "../components/Auth/LoginForm/LoginForm.scss";
+@import "../components/Account/ChangeNameForm/ChaneNameForm.scss";
+@import "../components/Account/ChangeEmailForm/ChangeEmailForm.scss";
+@import "../components/Account/ChangePasswordForm/ChangePasswordForm.scss";
+@import "../components/Account/AddressForm/AddressForm.scss";
+@import "../components/Account/ListAddress/ListAddress.scss";
+@import "../components/ListGames/ListGames.scss";
+@import "../components/Pagination/Pagination.scss";
+@import "../components/Game/HeaderGame/HeaderGame.scss";
+@import "../components/TabsGame/TabsGame.scss";
+@import "../components/Game/InfoGame/infoGame.scss";
+@import "../components/Game/CarrouselScreenshots/CarouselScreenshots.scss";
+
