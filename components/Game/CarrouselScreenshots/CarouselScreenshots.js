@@ -8,7 +8,7 @@ const settings = {
   dats: false,
   infinite: true,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 3,
   swipeToSlide: true,
 };
 
