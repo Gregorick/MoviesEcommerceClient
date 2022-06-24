@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Image, Icon, Button, Loader } from "semantic-ui-react";
 import { size } from "lodash";
+import useAuth from "../../../hook/useAuth";
+import { isFavoriteApi } from "../../../api/favorite";
+import classNames from "classnames";
 
 export default function HeaderGame({ game }) {
   const { poster } = game;
-  console.log(game);
   return (
     <Grid className="header-game">
       <Grid.Column mobile={16} tablet={6} computer={5}>
@@ -19,10 +21,39 @@ export default function HeaderGame({ game }) {
 
 const Info = ({ game }) => {
   const { title, summary, price, discount } = game;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { auth, logout } = useAuth();
+
+  console.log(isFavorite);
+
+  useEffect(() => {
+    (async () => {
+      const response = await isFavoriteApi(auth.idUser, game.id, logout);
+      if (size(response) > 0) setIsFavorite(true);
+      else setIsFavorite(false);
+    })();
+  }, [game]);
+
+  const addFavorite = () => {
+    console.log("Añaidr a favorite");
+  };
+
+  const deleteFavorite = () => {
+    console.log("Eliminar de favorito");
+  };
+
   return (
     <>
       <div className="header-game__title">
-        {title} <Icon name="heart outline" link />
+        {title}{" "}
+        <Icon
+          name={isFavorite ? "heart" : "heart outline"}
+          className={classNames({
+            like: isFavorite,
+          })}
+          link
+          onClick={isFavorite ? deleteFavorite : addFavorite}
+        />
       </div>
       <div className="header-game__delivery">Entrega en 24/48 horas</div>
       <div
