@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Grid, Image, Icon, Button, Loader } from "semantic-ui-react";
 import { size } from "lodash";
 import useAuth from "../../../hook/useAuth";
-import { isFavoriteApi } from "../../../api/favorite";
+import {
+  isFavoriteApi,
+  addFavoriteApi,
+  deleteFavoriteApi,
+} from "../../../api/favorite";
 import classNames from "classnames";
 
 export default function HeaderGame({ game }) {
@@ -22,9 +26,9 @@ export default function HeaderGame({ game }) {
 const Info = ({ game }) => {
   const { title, summary, price, discount } = game;
   const [isFavorite, setIsFavorite] = useState(false);
+  const [reloadFavorite, setReloadFavorite] = useState(false);
+  const [cargango, setCargango] = useState(null);
   const { auth, logout } = useAuth();
-
-  console.log(isFavorite);
 
   useEffect(() => {
     (async () => {
@@ -32,14 +36,29 @@ const Info = ({ game }) => {
       if (size(response) > 0) setIsFavorite(true);
       else setIsFavorite(false);
     })();
-  }, [game]);
+    setReloadFavorite(false);
+  }, [game, reloadFavorite]);
 
-  const addFavorite = () => {
-    console.log("Añaidr a favorite");
+  if (cargango) {
+    return <Loader active>Cargando</Loader>;
+  }
+
+  const addFavorite = async () => {
+    if (auth) {
+      setCargango(true);
+      await addFavoriteApi(auth.idUser, game.id, logout);
+      setCargango(false);
+      setIsFavorite(true);
+    }
   };
 
-  const deleteFavorite = () => {
-    console.log("Eliminar de favorito");
+  const deleteFavorite = async () => {
+    if (auth) {
+      setCargango(true);
+      await deleteFavoriteApi(auth.idUser, game.id, logout);
+      setCargango(false);
+      setReloadFavorite(true);
+    }
   };
 
   return (
