@@ -84,7 +84,7 @@ const Info = ({ game }) => {
           <p>Precio de venta al público: ${price}</p>
           <div className="header-game__buy-price-actions">
             <p>-{discount}%</p>
-            <p>${price - Math.round(price * discount) / 100}</p>
+            <p>${(price - Math.round(price * discount) / 100).toFixed(2)}</p>
           </div>
         </div>
         <Button className="header-game__buy-btn">Comprar</Button>
