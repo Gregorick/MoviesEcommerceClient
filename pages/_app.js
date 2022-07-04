@@ -6,15 +6,21 @@ import CartContext from "../context/CartContext";
 import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
 import { getToken, setToken, removeToken } from "../api/token";
-import { getProductsCart } from "../api/cart";
-import { ToastContainer } from "react-toastify";
+import {
+  getProductsCart,
+  addProductCart,
+  countProductsCart,
+} from "../api/cart";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function MyApp({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
+  const [totalProductCart, setTotalProductCart] = useState(0);
   const [reloadUser, setReloadUser] = useState(false);
+  const [reloadCart, setReloadCart] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,6 +35,13 @@ export default function MyApp({ Component, pageProps }) {
     }
     setReloadUser(false);
   }, [reloadUser]);
+
+  useEffect(() => {
+    setTotalProductCart(countProductsCart());
+    setReloadCart(false);
+  }, [reloadCart, auth]);
+
+  console.log(totalProductCart);
 
   const login = (token) => {
     setToken(token);
@@ -46,6 +59,16 @@ export default function MyApp({ Component, pageProps }) {
     }
   };
 
+  const addProduct = (product) => {
+    const token = getToken();
+    if (token) {
+      addProductCart(product);
+      setReloadCart(true);
+    } else {
+      toast.warning("Para agregar un producto necesitas inicias sesión");
+    }
+  };
+
   const authData = useMemo(
     () => ({
       auth,
@@ -58,13 +81,13 @@ export default function MyApp({ Component, pageProps }) {
 
   const cartData = useMemo(
     () => ({
-      productsCart: 0,
-      addProductCart: () => null,
+      productsCart: totalProductCart,
+      addProductCart: (product) => addProduct(product),
       getProductsCart: getProductsCart,
       removeProductCart: () => null,
       removeAllProductsCart: () => null,
     }),
-    []
+    [totalProductCart]
   );
 
   if (auth === undefined) return null;

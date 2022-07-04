@@ -20,6 +20,7 @@ export default function LoginForm({ showRegisterForm, closeModal }) {
         toast.success("Logeado con éxito");
         login(response.jwt);
         closeModal();
+        location.reload();
       } else {
         toast.error("El usuario o la contraseña es incorrecta");
       }

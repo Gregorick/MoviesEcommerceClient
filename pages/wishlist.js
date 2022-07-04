@@ -30,7 +30,7 @@ export default function wishlist() {
       <div className="wishlist__blog">
         <div className="title">Lista de deseos</div>
         <div className="data">
-          {!games && <Loader active>Cargando Juegpp</Loader>}
+          {!games && <Loader active>Cargando Juegos</Loader>}
           {games && size(games) === 0 && (
             <div className="data__not-found">
               <h3>No tienen juego en su lista de favorito</h3>
