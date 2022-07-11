@@ -21,6 +21,7 @@ const EmptyCart = () => {
 
 const FullCart = ({ products }) => {
   const [productsData, setProductsData] = useState(null);
+  const [reloadCart, setReloadCart] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -31,11 +32,16 @@ const FullCart = ({ products }) => {
       }
       setProductsData(productTemps);
     })();
-  }, []);
+    setReloadCart(false);
+  }, [reloadCart]);
 
   return (
     <BasicLayout>
-      <SummaryCat products={productsData} />
+      <SummaryCat
+        setReloadCart={setReloadCart}
+        reloadCart={reloadCart}
+        products={productsData}
+      />
     </BasicLayout>
   );
 };

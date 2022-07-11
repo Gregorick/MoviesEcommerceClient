@@ -3,8 +3,9 @@ import { Table, Image, Icon, TableFooter, Tab } from "semantic-ui-react";
 import { forEach, map } from "lodash";
 import useCart from "../../../hook/useCart";
 
-export default function SummaryCat({ products }) {
+export default function SummaryCat({ products, setReloadCart, reloadCart }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const { removeProductCart } = useCart();
 
   useEffect(() => {
     let price = 0;
@@ -13,7 +14,12 @@ export default function SummaryCat({ products }) {
       price += product.price;
     });
     setTotalPrice(price);
-  }, []);
+  }, [reloadCart, products]);
+
+  const removeProduct = (product) => {
+    removeProductCart(product);
+    setReloadCart(true);
+  };
 
   return (
     <div className="summary-cart">
@@ -35,7 +41,7 @@ export default function SummaryCat({ products }) {
                   <Icon
                     name="close"
                     link
-                    onClick={() => console.log("Borrar Producto")}
+                    onClick={() => removeProduct(product.url)}
                   ></Icon>
                   <Image src={product.poster.url} alt={product.title} />
                   {product.title}

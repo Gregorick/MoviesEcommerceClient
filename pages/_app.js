@@ -10,6 +10,7 @@ import {
   getProductsCart,
   addProductCart,
   countProductsCart,
+  removeProductCart,
 } from "../api/cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -69,6 +70,11 @@ export default function MyApp({ Component, pageProps }) {
     }
   };
 
+  const removeProduct = (product) => {
+    removeProductCart(product);
+    setReloadCart(true);
+  };
+
   const authData = useMemo(
     () => ({
       auth,
@@ -84,7 +90,7 @@ export default function MyApp({ Component, pageProps }) {
       productsCart: totalProductCart,
       addProductCart: (product) => addProduct(product),
       getProductsCart: getProductsCart,
-      removeProductCart: () => null,
+      removeProductCart: (product) => removeProduct(product),
       removeAllProductsCart: () => null,
     }),
     [totalProductCart]
