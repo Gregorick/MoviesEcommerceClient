@@ -55,7 +55,7 @@ export default function SummaryCat({ products, setReloadCart, reloadCart }) {
               <Table.Cell className="clear"></Table.Cell>
               <Table.Cell colSpan="2">Total:</Table.Cell>
               <Table.Cell className="total-price">
-                RD$ {totalPrice.toFixed(2)}
+                US$ {totalPrice.toFixed(2)}
               </Table.Cell>
             </Table.Row>
           </Table.Body>
