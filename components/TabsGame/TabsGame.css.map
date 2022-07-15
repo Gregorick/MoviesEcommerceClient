@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,MAAM,EAAC,IAAI;CAKd;;AAND,AAGI,UAHM,CAGN,GAAG,AAAA,IAAI,CAAC;EACJ,OAAO,EAAE,CAAC;CACb",
+    "sources": [
+        "TabsGame.scss"
+    ],
+    "names": [],
+    "file": "TabsGame.css"
+}

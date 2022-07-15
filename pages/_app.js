@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 import CartContext from "../context/CartContext";
 import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
-import { getToken, setToken, removeToken } from "../api/token";
+import { getToken, setToken, removeToken, removeTokenCart } from "../api/token";
 import {
   getProductsCart,
   addProductCart,
@@ -56,6 +56,7 @@ export default function MyApp({ Component, pageProps }) {
     if (auth) {
       removeToken();
       setAuth(null);
+      removeTokenCart();
       router.push("/");
     }
   };

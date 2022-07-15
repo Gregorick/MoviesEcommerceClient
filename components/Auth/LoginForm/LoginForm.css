@@ -1,0 +1,14 @@
+.login-form .actions {
+  -webkit-box-pack: justify !important;
+      -ms-flex-pack: justify !important;
+          justify-content: space-between !important;
+}
+
+.login-form .actions .ui.basic.button {
+  margin: 0;
+}
+
+.login-form .actions .ui.button.submit {
+  margin-right: 10px !important;
+}
+/*# sourceMappingURL=LoginForm.css.map */

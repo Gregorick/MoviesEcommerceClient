@@ -1,0 +1,37 @@
+.carousel-screenshots {
+  margin: 0 -5px;
+}
+
+.carousel-screenshots .slick-slide {
+  padding: 5px;
+}
+
+.carousel-screenshots .slick-slide .ui.image:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.carousel-screenshots .slick-slide .ui.image {
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center top;
+     object-position: center top;
+}
+
+.carousel-screenshots .slick-arrow {
+  z-index: 1;
+}
+
+.carousel-screenshots .slick-arrow:before {
+  font-size: 30px;
+}
+
+.carousel-screenshots .slick-arrow.slick-next {
+  right: 20px;
+}
+
+.carousel-screenshots .slick-arrow.slick-prev {
+  left: 20px;
+}
+/*# sourceMappingURL=CarouselScreenshots.css.map */

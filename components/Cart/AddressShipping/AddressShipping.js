@@ -6,8 +6,9 @@ import classNames from "classnames";
 import { getApiAddress } from "../../../api/address";
 import useAuth from "../../../hook/useAuth";
 
-export default function AddressShipping() {
+export default function AddressShipping({ setAddress }) {
   const [addresses, setAddresses] = useState(null);
+  const [addressActive, setAddressActive] = useState(null);
   const { auth, logout } = useAuth();
 
   useEffect(() => {
@@ -32,7 +33,12 @@ export default function AddressShipping() {
           <Grid>
             {map(addresses, (address) => (
               <Grid.Column key={address.id} mobile={16} tablet={8} computer={4}>
-                <Address address={address} />
+                <Address
+                  addressActive={addressActive}
+                  setAddressActive={setAddressActive}
+                  setAddress={setAddress}
+                  address={address}
+                />
               </Grid.Column>
             ))}
           </Grid>
@@ -42,9 +48,19 @@ export default function AddressShipping() {
   );
 }
 
-const Address = ({ address }) => {
+const Address = ({ address, addressActive, setAddressActive, setAddress }) => {
+  const changeAddress = () => {
+    setAddressActive(address._id);
+    setAddress(address);
+  };
+
   return (
-    <div className="address">
+    <div
+      className={classNames("address", {
+        active: addressActive === address._id,
+      })}
+      onClick={changeAddress}
+    >
       <p>{address.title}</p>
       <p>{address.name}</p>
       <p>{address.address}</p>

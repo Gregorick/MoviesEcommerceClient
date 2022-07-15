@@ -1,4 +1,4 @@
-import { TOKEN } from "../utils/constats";
+import { TOKEN, CART } from "../utils/constats";
 import jwtDecode from "jwt-decode";
 
 export function setToken(token) {
@@ -11,6 +11,10 @@ export function getToken() {
 
 export function removeToken() {
   localStorage.removeItem(TOKEN);
+}
+
+export function removeTokenCart() {
+  localStorage.removeItem(CART);
 }
 
 export function hashExpirationToken(token) {
