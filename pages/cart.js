@@ -4,6 +4,7 @@ import { getGameByUrlApi } from "../api/game";
 import useCart from "../hook/useCart";
 import SummaryCat from "../components/Cart/SummaryCart/SummaryCat";
 import AddressShipping from "../components/Cart/AddressShipping/AddressShipping";
+import Payment from "../components/Cart/Payment/Payment";
 
 export default function Cart() {
   const { getProductsCart } = useCart();
@@ -45,6 +46,7 @@ const FullCart = ({ products }) => {
         products={productsData}
       />
       <AddressShipping setAddress={setAddress} />
+      {address && <Payment products={productsData} address={address} />}
     </BasicLayout>
   );
 };
