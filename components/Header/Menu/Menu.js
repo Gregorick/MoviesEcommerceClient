@@ -90,7 +90,7 @@ const MenuOptions = ({ openModal, user, logout }) => {
     <Menu>
       {user ? (
         <>
-          <Link href="/orden">
+          <Link href="/orders">
             <Menu.Item as="a">
               <Icon name="game" />
               Mis Pedidos

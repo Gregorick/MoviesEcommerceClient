@@ -6,9 +6,12 @@ import { toast } from "react-toastify";
 import { size } from "lodash";
 import useAuth from "../../../../hook/useAuth";
 import useCart from "../../../../hook/useCart";
+import { paymentCartApi } from "../../../../api/cart";
 
 export default function FormPayment({ products, address }) {
   const { logout, auth } = useAuth();
+  const { removeAllProductsCart } = useCart();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
@@ -21,7 +24,22 @@ export default function FormPayment({ products, address }) {
     if (result.error) {
       toast.error(result.error.message);
     } else {
-      console.log(result);
+      console.log(result.token);
+      const response = await paymentCartApi(
+        result.token,
+        products,
+        auth.idUser,
+        address,
+        logout
+      );
+
+      if (size(response) > 0) {
+        toast.success("Pedido Completado");
+        removeAllProductsCart();
+        router.push("/orders");
+      } else {
+        toast.error("Error al realizar el pedido");
+      }
     }
     setLoading(false);
   };

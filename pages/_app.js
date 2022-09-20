@@ -11,6 +11,7 @@ import {
   addProductCart,
   countProductsCart,
   removeProductCart,
+  removeAllProductsCart,
 } from "../api/cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -92,7 +93,7 @@ export default function MyApp({ Component, pageProps }) {
       addProductCart: (product) => addProduct(product),
       getProductsCart: getProductsCart,
       removeProductCart: (product) => removeProduct(product),
-      removeAllProductsCart: () => null,
+      removeAllProductsCart: removeAllProductsCart,
     }),
     [totalProductCart]
   );
